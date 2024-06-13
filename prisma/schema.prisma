@@ -31,7 +31,7 @@ model Users {
   registrationDate DateTime       @default(now())
   lastLogin        DateTime
   accountStatus    StatusAccount? @default(INACTIVE)
-  accessLevel      Roles?         @default(USER)
+  accessLevel      Roles         @default(USER)
   usersAdress      UsersAdress[]
 }
 

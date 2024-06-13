@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './modules/users/users.module';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
-import { ProductsModule } from './products/products.module';
+import { ProductsModule } from './modules/products/products.module';
+import { PrismaModule } from './modules/prisma/prisma.module';
 
 
 
@@ -17,8 +16,9 @@ import { ProductsModule } from './products/products.module';
     }),
     AuthModule,
     ProductsModule,
+    PrismaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
