@@ -1,6 +1,7 @@
-import { UpdateUserDto } from "../dto/update.product.dto";
+import { UpdateProductDto } from "../dto/update.product.dto";
 
 
-export interface IUpdateUserRepository {
-  update(email: string,updateUserDto: UpdateUserDto): Promise<void>;
+
+export interface IUpdateProductRepository {
+  update(id: string, updateProductDto: UpdateProductDto): Promise<void>;
 }

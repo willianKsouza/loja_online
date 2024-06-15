@@ -30,7 +30,7 @@ model Users {
   birthDate        String
   registrationDate DateTime       @default(now())
   lastLogin        DateTime
-  accountStatus    StatusAccount? @default(INACTIVE)
+  accountStatus    StatusAccount @default(INACTIVE)
   accessLevel      Roles         @default(USER)
   usersAdress      UsersAdress[]
 }

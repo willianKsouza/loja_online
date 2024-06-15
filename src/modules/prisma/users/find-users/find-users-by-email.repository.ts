@@ -5,11 +5,8 @@ import { User } from 'src/entity/user';
 import { IFindByEmailRepository } from 'src/modules/auth/interfaces/IFindByEmailRepository';
 
 
-
-
-
 @Injectable()
-export class FindByEmailRepository implements IFindByEmailRepository {
+export class FindUserByEmailRepository implements IFindUserByEmailRepository {
   private prisma = prisma()
   
   async findByEmail(email: string):Promise<User | null> {
@@ -27,6 +24,7 @@ export class FindByEmailRepository implements IFindByEmailRepository {
           throw new HttpException('tempo excedido', HttpStatus.REQUEST_TIMEOUT)
         }
       }
+      throw new HttpException('algo de errado ocorreu', HttpStatus.BAD_REQUEST);
     }
   }
 }

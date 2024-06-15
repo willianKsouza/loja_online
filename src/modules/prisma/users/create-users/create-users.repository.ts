@@ -31,6 +31,7 @@ export class CreateUserPrismaRepository implements ICreateUserRepository {
           );
         }
       }
+      throw new HttpException('algo de errado ocorreu', HttpStatus.BAD_REQUEST);
     }
   }
 }

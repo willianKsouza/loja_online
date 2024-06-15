@@ -16,7 +16,7 @@ CREATE TABLE "Users" (
     "birthDate" TEXT NOT NULL,
     "registrationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "lastLogin" TIMESTAMP(3) NOT NULL,
-    "accountStatus" "StatusAccount" DEFAULT 'INACTIVE',
+    "accountStatus" "StatusAccount" NOT NULL DEFAULT 'INACTIVE',
     "accessLevel" "Roles" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")

@@ -5,11 +5,12 @@ import { ICreateProductRepository } from 'src/modules/products/create/interfaces
 
 
 import { ulid } from 'ulid';
+import { prisma } from '../../prisma.connect';
 
 
 @Injectable()
 export class CreateProductPrismaRepository implements ICreateProductRepository {
-  private prisma =  new PrismaClient();
+  private prisma =  prisma()
   
   async create(createProductDto: CreateProductDto): Promise<void> {
     const ULID = ulid();

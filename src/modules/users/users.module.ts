@@ -4,11 +4,10 @@ import { CreateService } from './create/create.service';
 import { createRepositoryToken } from './create/create.user.repository.token';
 import { UpdateUserService } from './update/update.service';
 import { updateUserRepositoryToken } from './update/update.user.repository.token';
-
-import { CreateUserPrismaRepository } from 'src/modules/prisma/users/create-users/create-users.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
-import { UpdateUserPrismaRepository } from 'src/modules/prisma/users/update-users/update-users.repository';
+
+import { UsersRepository } from '../repositoryDistributor/userDistributorRepository';
 
 
 @Module({
@@ -18,12 +17,12 @@ import { UpdateUserPrismaRepository } from 'src/modules/prisma/users/update-user
     CreateService,
     {
       provide: createRepositoryToken,
-      useClass: CreateUserPrismaRepository,
+      useClass: UsersRepository.CreateUser,
     },
     UpdateUserService,
     {
       provide: updateUserRepositoryToken,
-      useClass: UpdateUserPrismaRepository,
+      useClass:UsersRepository.UpdateUser,
     },
   ],
 })

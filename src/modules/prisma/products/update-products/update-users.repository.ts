@@ -3,20 +3,22 @@ import { Prisma } from '@prisma/client';
 import { UpdateUserDto } from 'src/modules/users/update/dto/update.user.dto';
 import { IUpdateUserRepository } from 'src/modules/users/update/interfaces/IUpdate.user.repository';
 import { prisma } from '../../prisma.connect';
+import { IUpdateProductRepository } from 'src/modules/products/update/interfaces/IUpdate.user.repository';
+import { UpdateProductDto } from 'src/modules/products/update/dto/update.product.dto';
 
 @Injectable()
-export class UpdateUserPrismaRepository implements IUpdateUserRepository {
+export class UpdateProductPrismaRepository implements IUpdateProductRepository {
 
   private prisma = prisma()
 
-  async update(id: string, updateUserDto: UpdateUserDto ): Promise<void> {
+  async update(id: string, updateProductDto: UpdateProductDto ): Promise<void> {
 
     try {
-      await this.prisma.users.update({
+      await this.prisma.products.update({
         where: {
           id:id
         },
-        data: updateUserDto
+        data: updateProductDto
       });
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -33,6 +35,7 @@ export class UpdateUserPrismaRepository implements IUpdateUserRepository {
         }
       }
       throw new HttpException('algo de errado ocorreu', HttpStatus.BAD_REQUEST);
+
     }
   }
 }

@@ -1,16 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { updateUserRepositoryToken } from './update.user.repository.token';
-import { IUpdateUserRepository } from './interfaces/IUpdate.user.repository';
-import { UpdateUserDto } from './dto/update.product.dto';
+import { updateProductRepositoryToken } from './update.product.repository.token';
+import { IUpdateProductRepository } from './interfaces/IUpdate.user.repository';
+import { UpdateProductDto } from './dto/update.product.dto';
+
+
 
 @Injectable()
-export class UpdateUserService {
+export class UpdateProductService {
   constructor(
-    @Inject(updateUserRepositoryToken)
-    private readonly updateRepository: IUpdateUserRepository,
+    @Inject(updateProductRepositoryToken)
+    private readonly updateProductRepository: IUpdateProductRepository,
   ) {}
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<void> {
-   await this.updateRepository.update(id,updateUserDto)
+  async update(id: string, updateProductDto: UpdateProductDto): Promise<void> {
+   await this.updateProductRepository.update(id,updateProductDto)
   }
 }

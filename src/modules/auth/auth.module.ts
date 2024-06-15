@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { findUserRepositoryToken } from './find.repository.token';
 import { JwtModule } from '@nestjs/jwt';
 import { FindByEmailRepository } from 'src/modules/prisma/users/find-users/find-users-by-email.repository';
+import { UsersRepository } from '../repositoryDistributor/userDistributorRepository';
 
 
 @Module({
@@ -22,7 +23,7 @@ import { FindByEmailRepository } from 'src/modules/prisma/users/find-users/find-
     AuthService,
     {
       provide: findUserRepositoryToken,
-      useClass: FindByEmailRepository,
+      useClass: UsersRepository.FindUserByEmail,
     },
   ],
   exports:[AuthService]
