@@ -7,6 +7,6 @@ export class User  {
   cpf: string;
   phone: string;
   birthDate: string;
-  registrationDate: Date;
+  createdAt: Date;
   lastLogin: Date;
 }

@@ -20,33 +20,34 @@ enum StatusAccount {
 }
 
 model Users {
-  id               String         @id @unique
-  email            String         @unique
-  name             String
-  password         String
-  cpf              String         @unique
-  nickName         String
-  phone            String
-  birthDate        String
-  registrationDate DateTime       @default(now())
-  lastLogin        DateTime
-  accountStatus    StatusAccount @default(INACTIVE)
-  accessLevel      Roles         @default(USER)
-  usersAdress      UsersAdress[]
+  id            String        @id @unique
+  email         String        @unique
+  name          String
+  password      String
+  cpf           String        @unique
+  nickName      String
+  phone         String
+  birthDate     String
+  createdAt     DateTime      @default(now())
+  lastLogin     DateTime
+  accountStatus StatusAccount @default(INACTIVE)
+  accessLevel   Roles         @default(USER)
+  usersAdress   UsersAdress[]
+  UserToken     UserToken[]
 }
 
 model UsersAdress {
-  id               String   @id
-  userId           String
-  street           String
-  number           String
-  complement       String
-  neighborhood     String
-  city             String
-  state            String
-  cep              String
-  registrationDate DateTime
-  Users            Users    @relation(fields: [userId], references: [id])
+  id           String   @id
+  userId       String
+  street       String
+  number       String
+  complement   String
+  neighborhood String
+  city         String
+  state        String
+  cep          String
+  createdAt    DateTime
+  Users        Users    @relation(fields: [userId], references: [id])
 }
 
 model Products {
@@ -62,4 +63,12 @@ model Products {
   specifications Json
   images         String[]
   stock          Int
+}
+
+model UserToken {
+  userTokenId String   @id
+  userId      String
+  token       String
+  createdAt   DateTime @default(now())
+  users       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

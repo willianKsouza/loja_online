@@ -1,23 +1,25 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create.user.dto';
-import { createRepositoryToken } from './create.user.repository.token';
+import { createUserRepositoryToken } from './create.user.repository.token';
 import { ICreateUserRepository } from './interfaces/ICreate.user.repository';
 import * as bcrypt from 'bcrypt';
 
-
-
 @Injectable()
-export class CreateService {
+export class CreateUserService {
   constructor(
-    @Inject(createRepositoryToken)
+    @Inject(createUserRepositoryToken)
     private readonly createRepository: ICreateUserRepository,
   ) {}
   async create(createUserDto: CreateUserDto): Promise<void> {
-      const salt = await bcrypt.genSalt()
+    try {
+      const salt = await bcrypt.genSalt();
       const hash = await bcrypt.hash(createUserDto.password, salt);
       await this.createRepository.create({
         ...createUserDto,
-        password:hash
+        password: hash,
       });
+    } catch (error) {
+      throw new HttpException(error.response, error.status)
+    }
   }
 }

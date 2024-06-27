@@ -1,1 +1,1 @@
-export const createRepositoryToken = 'createRepositoryToken';
+export const createUserRepositoryToken = 'createUserRepositoryToken';

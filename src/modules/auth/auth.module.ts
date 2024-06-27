@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { findUserRepositoryToken } from './find.repository.token';
+import { AuthService } from './logIn/auth.service';
+import { findUserRepositoryToken } from './logIn/find.repository.token';
 import { JwtModule } from '@nestjs/jwt';
-import { FindByEmailRepository } from 'src/modules/prisma/users/find-users/find-users-by-email.repository';
 import { UsersRepository } from '../repositoryDistributor/userDistributorRepository';
+import { sendForgotEmailPassword } from './forgotPassword/forgot.password.repository.token';
+import { SendForgotEmailPasswordService } from './forgotPassword/resetPassWord.service';
 
 
 @Module({
@@ -25,6 +26,11 @@ import { UsersRepository } from '../repositoryDistributor/userDistributorReposit
       provide: findUserRepositoryToken,
       useClass: UsersRepository.FindUserByEmail,
     },
+    SendForgotEmailPasswordService,
+    {
+      provide: sendForgotEmailPassword,
+      useClass:UsersRepository.ForgotPassWord
+    }
   ],
   exports:[AuthService]
 })

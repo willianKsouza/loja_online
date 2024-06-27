@@ -9,6 +9,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  @ApiProperty()
   @IsString()
   name: string;
 
@@ -36,7 +37,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsDateString()
-  registrationDate: Date;
+  createdAt: Date;
 
   @ApiProperty()
   @IsDateString()

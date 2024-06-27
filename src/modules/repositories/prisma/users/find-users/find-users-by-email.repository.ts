@@ -1,8 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { prisma } from '../../prisma.connect';
 import { User } from 'src/entity/user';
-import { IFindByEmailRepository } from 'src/modules/auth/interfaces/IFindByEmailRepository';
+import { IFindByEmailRepository } from 'src/modules/auth/logIn/interfaces/IFindByEmailRepository';
+import { NotFoundError } from 'rxjs';
+import { IFindUserByEmailRepository } from 'src/modules/users/findByEmail/interfaces/IUpdate.user.repository';
 
 
 @Injectable()
@@ -15,7 +17,7 @@ export class FindUserByEmailRepository implements IFindUserByEmailRepository {
         where:{
             email:email,
         }
-      });
+      })
       return user
     } catch (error) {
       
@@ -24,7 +26,7 @@ export class FindUserByEmailRepository implements IFindUserByEmailRepository {
           throw new HttpException('tempo excedido', HttpStatus.REQUEST_TIMEOUT)
         }
       }
-      throw new HttpException('algo de errado ocorreu', HttpStatus.BAD_REQUEST);
+      throw new NotFoundException();
     }
   }
 }
