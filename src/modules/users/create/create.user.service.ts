@@ -12,12 +12,13 @@ export class CreateUserService {
   ) {}
   async create(createUserDto: CreateUserDto): Promise<void> {
     try {
+
       const salt = await bcrypt.genSalt();
       const hash = await bcrypt.hash(createUserDto.password, salt);
-      await this.createRepository.create({
+     await this.createRepository.create({
         ...createUserDto,
         password: hash,
-      });
+      })
     } catch (error) {
       throw new HttpException(error.response, error.status)
     }

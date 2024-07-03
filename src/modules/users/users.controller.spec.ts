@@ -44,7 +44,7 @@ describe('UsersController', () => {
     create: jest.fn().mockResolvedValue(newUser),
   };
   let mockUpdateUsersService = {
-    update: jest.fn().mockImplementation(),
+    update: jest.fn(),
   };
 
   beforeEach(async () => {
